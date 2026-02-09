@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Internship Application Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #222;
+    }
+    p {
+      color: #444;
+      line-height: 1.6;
+    }
+    .links a {
+      display: inline-block;
+      margin-right: 15px;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #0066cc;
+      font-weight: bold;
+    }
+    .footer {
+      margin-top: 40px;
+      color: #777;
+      font-size: 14px;
+    }
+    code {
+      background: #eee;
+      padding: 4px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Internship Application Assistant</h1>
+
+    <p>
+      A personal, resume-aware tool that I use in my daily workflow to generate
+      honest, tailored internship applications from job descriptions.
+    </p>
+
+    <p>
+      The system analyzes job descriptions, matches them with my resume,
+      selects an appropriate application template, and optionally refines
+      the language using a lightweight LLM — with safe fallbacks.
+    </p>
+
+    <h2>How it works</h2>
+    <ul>
+      <li>Reads job descriptions (JD)</li>
+      <li>Matches relevant skills & projects from resume</li>
+      <li>Auto-selects a cover letter template</li>
+      <li>Optionally improves wording using Gemini</li>
+    </ul>
+
+    <h2>Usage</h2>
+    <p>
+      This is a command-line tool. To use it locally:
+    </p>
+    <pre><code>python main.py</code></pre>
+
+    <div class="links">
+      <a href="https://github.com/mukeshsiyol/internship-application-assistant" target="_blank">
+        GitHub Repository
+      </a>
+    </div>
+
+    <div class="footer">
+      Built and maintained by Mukesh Kumar · IIT Delhi
+    </div>
+  </div>
+</body>
+</html>
