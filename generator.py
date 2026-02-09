@@ -1,34 +1,66 @@
 from textwrap import dedent
 
-def generate_answer(company, matched, name, availability, role_type):
-    if role_type == "tech":
-        if matched:
-            body = f"My technical skills in {', '.join(matched)} align well with this role."
-        else:
-            body = (
-                "While I may not meet every technical requirement yet, "
-                "I have strong programming fundamentals and the ability to "
-                "quickly learn new technologies."
-            )
-    else:
-        body = (
-            "I am highly motivated, organized, and eager to learn. "
-            "I enjoy working in collaborative environments and contributing "
-            "reliably to team goals."
-        )
+def generate_answer(company, skills, projects, name, availability, jd_length):
+    skills_text = ', '.join(skills)
 
-    return dedent(f'''
+    # -------- OPTION 1 (Detailed) --------
+    option1 = dedent(f'''
     Dear Hiring Team at {company},
 
-    I am writing to apply for this internship opportunity.
+    I am writing to express my keen interest in the internship opportunity at {company}.
+    I am highly motivated to contribute to your team while gaining valuable
+    hands-on industry experience.
 
-    {body}
+    My technical skills include {skills_text if skills else 'a strong foundation in programming fundamentals'}.
+    {f'One relevant project I worked on is {projects[0]}.' if projects else ''}
 
-    I am committed to continuous learning and delivering disciplined,
-    high-quality work in line with your expectations.
+    I am disciplined, a quick learner, and committed to delivering high-quality work.
 
-    Availability: {availability}
+    I am available to start immediately.
+
+    Sincerely,
+    {name}
+    ''')
+
+    # -------- OPTION 2 (Balanced) --------
+    option2 = dedent(f'''
+    Dear Hiring Team at {company},
+
+    I am excited to apply for the internship at {company}, driven by a strong desire
+    to contribute meaningfully and gain practical industry experience.
+
+    I possess foundational skills in {skills_text if skills else 'software development'}.
+    {f'I have applied these skills in a project: {projects[0]}.' if projects else ''}
+
+    I am a disciplined and quick learner, dedicated to producing quality results.
+
+    My availability is immediate.
 
     Regards,
     {name}
     ''')
+
+    # -------- OPTION 3 (Concise) --------
+    option3 = dedent(f'''
+    Dear Hiring Team at {company},
+
+    I am writing to apply for the internship at {company}.
+
+    My relevant skills include {skills_text if skills else 'software development fundamentals'}.
+    {f'Relevant project: {projects[0]}.' if projects else ''}
+
+    I am a disciplined, fast-learning individual committed to delivering quality work.
+
+    Available immediately.
+
+    Sincerely,
+    {name}
+    ''')
+
+    # -------- AUTO-SELECTION --------
+    if jd_length < 120:
+        return option1
+    elif jd_length < 300:
+        return option2
+    else:
+        return option3

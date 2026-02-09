@@ -1,30 +1,46 @@
 import os
-from config import NAME, SKILLS, AVAILABILITY
+from config import NAME, AVAILABILITY
 from jd_reader import read_jd
-from matcher import match_skills, detect_role_type
+from resume_parser import parse_resume
+from matcher import match_skills, match_projects
 from generator import generate_answer
+from gemini_rewriter import rewrite_with_gemini
 
-JD_DIR = "data/jds"
-OUT_DIR = "output/applications"
+USE_GEMINI = True
+
+JD_DIR = 'data/jds'
+OUT_DIR = 'output/applications'
+RESUME = 'Mukesh_Kumar_Resume (1).pdf'
 
 os.makedirs(OUT_DIR, exist_ok=True)
 
+resume_skills, resume_projects = parse_resume(RESUME)
+
 for jd_file in os.listdir(JD_DIR):
-    if not jd_file.endswith(".txt"):
+    if not jd_file.endswith('.txt'):
         continue
 
-    path = os.path.join(JD_DIR, jd_file)
-    jd_text = read_jd(path)
+    jd_text = read_jd(os.path.join(JD_DIR, jd_file))
+    jd_length = len(jd_text.split())
 
-    matched = match_skills(jd_text, SKILLS)
-    role_type = detect_role_type(jd_text)
+    matched_skills = match_skills(jd_text, resume_skills)
+    matched_projects = match_projects(jd_text, resume_projects)
 
-    company = jd_file.replace(".txt", "")
-    answer = generate_answer(company, matched, NAME, AVAILABILITY, role_type)
+    company = jd_file.replace('.txt', '')
+    draft = generate_answer(
+        company,
+        matched_skills,
+        matched_projects,
+        NAME,
+        AVAILABILITY,
+        jd_length
+    )
 
-    with open(os.path.join(OUT_DIR, f"{company}.txt"), "w", encoding="utf-8") as f:
-        f.write(answer)
+    final = rewrite_with_gemini(draft) if USE_GEMINI else draft
 
-    print(f" {company} | Role: {role_type} | Match: {len(matched)}")
+    with open(os.path.join(OUT_DIR, f'{company}.txt'), 'w', encoding='utf-8') as f:
+        f.write(final)
 
-print("Applications generated successfully")
+    print(f'? {company} | JD words: {jd_length} | Gemini: {USE_GEMINI}')
+
+print('Applications generated successfully')
