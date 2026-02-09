@@ -1,0 +1,52 @@
+import os
+import requests
+
+API_KEY = os.getenv('GEMINI_API_KEY')
+if not API_KEY:
+    raise RuntimeError('GEMINI_API_KEY not set')
+
+def rewrite_with_gemini(draft_text):
+    # try flash-lite first
+    model_name = 'gemini-2.5-flash-lite'
+
+    url = (
+        'https://generativelanguage.googleapis.com/v1beta/models/'
+        f'{model_name}:generateContent?key=' + API_KEY
+    )
+
+    payload = {
+        'contents': [
+            {
+                'parts': [
+                    {
+                        'text': f'''
+Improve the following internship application.
+Keep it honest and professional.
+Do NOT add skills not mentioned.
+
+Text:
+{draft_text}
+'''
+                    }
+                ]
+            }
+        ]
+    }
+
+    try:
+        response = requests.post(url, json=payload, timeout=30)
+        if response.status_code != 200:
+            # fallback to flash-lite-latest
+            model_name = 'gemini-flash-lite-latest'
+            url = (
+                'https://generativelanguage.googleapis.com/v1beta/models/'
+                f'{model_name}:generateContent?key=' + API_KEY
+            )
+            response = requests.post(url, json=payload, timeout=30)
+
+        response.raise_for_status()
+        return response.json()['candidates'][0]['content']['parts'][0]['text']
+
+    except Exception:
+        # safe fallback: return unmodified draft
+        return draft_text
