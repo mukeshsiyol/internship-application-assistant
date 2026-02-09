@@ -6,6 +6,7 @@ API_KEY = os.getenv('GEMINI_API_KEY')
 def rewrite_with_gemini(draft_text):
     if not API_KEY:
         # Graceful fallback when API key is not set
+        print('Note: GEMINI_API_KEY not set. Using draft text without rewriting.')
         return draft_text
     # try flash-lite first
     model_name = 'gemini-2.5-flash-lite'
