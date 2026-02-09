@@ -14,6 +14,12 @@ RESUME = 'Mukesh_Kumar_Resume (1).pdf'
 
 os.makedirs(OUT_DIR, exist_ok=True)
 
+# Check if resume file exists
+if not os.path.exists(RESUME):
+    print(f'Error: Resume file "{RESUME}" not found.')
+    print('Please place your resume PDF in the project root directory.')
+    exit(1)
+
 resume_skills, resume_projects = parse_resume(RESUME)
 
 for jd_file in os.listdir(JD_DIR):

@@ -1,6 +1,6 @@
 # Internship Application Assistant
 
-An intelligent, resume-aware system that automatically generates **honest, customized internship applications** by analyzing job descriptions and matching them with the candidate’s resume.
+An intelligent, resume-aware system that automatically generates **honest, customized internship applications** by analyzing job descriptions and matching them with the candidateï¿½s resume.
 
 This project combines **rule-based reasoning** with **optional LLM-powered language refinement** to produce professional, recruiter-friendly cover letters at scale.
 
@@ -39,38 +39,60 @@ This project combines **rule-based reasoning** with **optional LLM-powered langu
 ## ?? System Architecture
 
             +------------------+
-            ¦  Resume (PDF)     ¦
-            ¦  Mukesh_Kumar.pdf ¦
+            ï¿½  Resume (PDF)     ï¿½
+            ï¿½  Mukesh_Kumar.pdf ï¿½
             +------------------+
-                      ¦
+                      ï¿½
                       ?
             +------------------+
-            ¦ Resume Parser     ¦
-            ¦ - Skills          ¦
-            ¦ - Projects        ¦
+            ï¿½ Resume Parser     ï¿½
+            ï¿½ - Skills          ï¿½
+            ï¿½ - Projects        ï¿½
             +------------------+
-                      ¦
+                      ï¿½
                       ?
 
 ---
 
 ## ?? How It Works
 
-1. Place job descriptions in:
+1. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-2. Place resume PDF in project root:
+2. Place job descriptions in:
+   ```
+   data/jds/company_name.txt
+   ```
 
-3. Run:
+3. Place resume PDF in project root:
+   ```
+   Mukesh_Kumar_Resume (1).pdf
+   ```
 
-4. Generated applications appear in:
+4. (Optional) Set Gemini API key for enhanced rewriting:
+   ```bash
+   export GEMINI_API_KEY=your_api_key_here
+   ```
+
+5. Run:
+   ```bash
+   python3 main.py
+   ```
+
+6. Generated applications appear in:
+   ```
+   output/applications/
+   ```
 
 ---
 
 ## ?? Tech Stack
 
 - **Python 3.11**
-- **PyPDF2** – resume parsing
-- **Requests** – Gemini REST API
+- **PyPDF2** ï¿½ resume parsing
+- **Requests** ï¿½ Gemini REST API
 - **Google Gemini API** (optional)
 - Rule-based NLP logic (no black-box matching)
 
