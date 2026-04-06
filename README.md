@@ -1,60 +1,60 @@
 # Internship Application Assistant
 
-An intelligent, resume-aware system that automatically generates **honest, customized internship applications** by analyzing job descriptions and matching them with the candidate’s resume.
+An intelligent, resume-aware system that automatically generates **honest, customized internship applications** by analyzing job descriptions and matching them with the candidateâ€™s resume.
 
 This project combines **rule-based reasoning** with **optional LLM-powered language refinement** to produce professional, recruiter-friendly cover letters at scale.
 
 ---
 
-## ?? Key Features
+## Key Features
 
-- ?? **Resume-aware personalization**
+- **Resume-aware personalization**
   - Parses a PDF resume
   - Extracts skills and projects
   - Uses only *relevant* information per job
 
-- ?? **Job Description (JD) analysis**
+- **Job Description (JD) analysis**
   - Reads raw job descriptions (text)
   - Measures JD length
   - Matches transferable skills and projects
 
-- ?? **Multiple cover letter templates**
+- **Multiple cover letter templates**
   - Option 1: Detailed (short JDs)
   - Option 2: Balanced (medium JDs)
   - Option 3: Concise (long JDs)
   - Automatically selected based on JD length
 
-- ?? **LLM-assisted rewriting (optional)**
+- **LLM-assisted rewriting (optional)**
   - Uses Google Gemini API (Flash / Lite models)
   - Graceful fallback if quota is exceeded
   - Never invents skills or experience
 
-- ??? **Production-safe design**
+- **Production-safe design**
   - No crashes on API failure
   - Deterministic rule-based fallback
   - Terminal-only workflow
 
 ---
 
-## ?? System Architecture
+## System Architecture
 
             +------------------+
-            ¦  Resume (PDF)     ¦
-            ¦  Mukesh_Kumar.pdf ¦
+            Â¦  Resume (PDF)     Â¦
+            Â¦  Mukesh_Kumar.pdf Â¦
             +------------------+
-                      ¦
+                      Â¦
                       ?
             +------------------+
-            ¦ Resume Parser     ¦
-            ¦ - Skills          ¦
-            ¦ - Projects        ¦
+            Â¦ Resume Parser     Â¦
+            Â¦ - Skills          Â¦
+            Â¦ - Projects        Â¦
             +------------------+
-                      ¦
+                      Â¦
                       ?
 
 ---
 
-## ?? How It Works
+## How It Works
 
 1. Place job descriptions in:
 
@@ -66,27 +66,27 @@ This project combines **rule-based reasoning** with **optional LLM-powered langu
 
 ---
 
-## ?? Tech Stack
+## Tech Stack
 
 - **Python 3.11**
-- **PyPDF2** – resume parsing
-- **Requests** – Gemini REST API
+- **PyPDF2** â€“ resume parsing
+- **Requests** â€“ Gemini REST API
 - **Google Gemini API** (optional)
 - Rule-based NLP logic (no black-box matching)
 
 ---
 
-## ?? Design Philosophy
+## Design Philosophy
 
-- ? No fake skills
-- ? No blind mass-apply spam
-- ? Honest representation
-- ? Explainable logic
-- ? Resume-aligned personalization
+-  No fake skills
+-  No blind mass-apply spam
+-  Honest representation
+-  Explainable logic
+-  Resume-aligned personalization
 
 ---
 
-## ?? Possible Enhancements
+## Possible Enhancements
 
 - Fit score thresholding
 - CSV-based application tracking
@@ -95,7 +95,7 @@ This project combines **rule-based reasoning** with **optional LLM-powered langu
 
 ---
 
-## ?? Author
+## Author
 
 **Mukesh Kumar**  
 IIT Delhi  
